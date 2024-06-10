@@ -18,7 +18,6 @@ interface UserRequestBody {
   email: string;
   password: string;
   phoneNumber: string;
-  address?: Address;
 }
 
 export async function POST(req: NextRequest) {
@@ -26,8 +25,7 @@ export async function POST(req: NextRequest) {
     const body: UserRequestBody = await req.json();
 
     // Validate request body against userSchema
-    const { name, email, password, phoneNumber, address } =
-      userSchema.parse(body);
+    const { name, email, password, phoneNumber } = userSchema.parse(body);
 
     await connectMongoDB();
 
@@ -47,7 +45,7 @@ export async function POST(req: NextRequest) {
       email,
       password: hashPassword,
       phoneNumber,
-      address: address ?? {
+      address: {
         street: "",
         city: "",
         state: "",
