@@ -68,7 +68,7 @@ const Navbar = () => {
           <SideBar />
         </div>
         <div className="max-lg:hidden">
-          <h1 className="text-lg font-bold">Exclusive</h1>
+          <h1 className="text-lg font-bold">Shopify</h1>
         </div>
 
         <div className="flex gap-x-4 md:gap-x-8 text-sm font-medium max-md:hidden">

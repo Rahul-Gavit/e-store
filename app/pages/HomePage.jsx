@@ -29,7 +29,7 @@ const HomePage = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/api/products", {
+      const response = await fetch("/api/products", {
         cache: "no-store",
       });
 

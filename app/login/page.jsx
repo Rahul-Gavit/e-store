@@ -97,7 +97,7 @@ const LoginPage = () => {
       <div className="w-full md:w-1/2 px-4 sm:px-12 lg:w-1/3 py-6 md:py-12 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
         <form onSubmit={handleFormSubmit}>
           <div className="flex flex-col gap-y-2">
-            <h1 className="text-2xl font-semibold">Log in to Exclusive</h1>
+            <h1 className="text-2xl font-semibold">Log in to Shopify</h1>
             <p className="text-xs font-medium">Enter your details below</p>
           </div>
 

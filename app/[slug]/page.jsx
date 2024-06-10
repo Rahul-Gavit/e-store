@@ -32,7 +32,7 @@ const Categories = () => {
   const fetchProductsByCategories = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/api/${params.slug}`, {
+      const response = await fetch(`/api/${params.slug}`, {
         cache: "no-store",
       });
 

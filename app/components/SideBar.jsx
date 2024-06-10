@@ -61,20 +61,27 @@ const SideBar = () => {
         <Card
           color="transparent"
           shadow={false}
-          className="h-[calc(100vh-2rem)] w-full p-4"
+          className="h-[calc(100vh-2rem)] w-full py-4"
         >
-          <div className="mb-2 flex justify-between items-center pl-6">
-            <p className="">
-              Hey{" "}
-              <span className="text-red-500">
-                {userName ? userName : "User"} !
-              </span>
-            </p>
-            <p>
-              <IconButton variant="text" size="lg" onClick={closeDrawer}>
-                <XMarkIcon className="h-6 w-6 stroke-2 hover:text-red-500" />
-              </IconButton>
-            </p>
+          <div className="mb-2 pl-4 pr-1">
+            <div className="flex justify-between items-center">
+              <p className="">
+                Hey{" "}
+                <span className="text-red-500">
+                  {userName ? userName : "User"} !
+                </span>
+              </p>
+              <p>
+                <IconButton variant="text" size="lg" onClick={closeDrawer}>
+                  <XMarkIcon className="h-6 w-6 stroke-2 hover:text-red-500" />
+                </IconButton>
+              </p>
+            </div>
+            <div className="">
+              <p className="text-xs">
+                welcome in <span className=" text-red-500">Shopify</span>
+              </p>
+            </div>
           </div>
           <List>
             <Accordion

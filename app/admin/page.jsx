@@ -247,7 +247,7 @@ const Admin = () => {
                   radius="sm"
                   className="bg-red-500 px-8 text-white border-none"
                 >
-                  Add more
+                  Add
                 </Button>
               </div>
               {/* Render images */}

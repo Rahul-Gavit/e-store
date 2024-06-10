@@ -18,9 +18,7 @@ const Orders = () => {
       setLoading(true);
       const userId = params.userId;
       try {
-        const response = await fetch(
-          `http://localhost:3000/api/order?userId=${userId}`
-        );
+        const response = await fetch(`/api/order?userId=${userId}`);
         if (!response.ok) {
           throw new Error("Failed to fetch orders");
         }
@@ -92,7 +90,7 @@ const Orders = () => {
               <div>
                 <div className="flex items-center gap-x-2 pl-2">
                   <p className="text-sm font-medium">Total Amount: </p>
-                  <p className="text-xs">{order.totalAmount}</p>
+                  <p className="text-xs">₹{order.totalAmount}</p>
                 </div>
                 <div className="pl-2">
                   <p className="text-sm font-medium">Shipping Address: </p>

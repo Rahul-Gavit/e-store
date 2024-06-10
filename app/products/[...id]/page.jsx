@@ -59,12 +59,9 @@ const ProductPage = ({ params }) => {
   const fetchProduct = async () => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/products/${params.id}`,
-        {
-          cache: "no-store",
-        }
-      );
+      const response = await fetch(`/api/products/${params.id}`, {
+        cache: "no-store",
+      });
       const data = await response.json();
       setProduct(data.product);
     } catch (error) {

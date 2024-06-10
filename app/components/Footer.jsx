@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <div className="py-8 md:py-16 bg-black text-white flex flex-col px-6 md:px-0 max-md:divide-y md:flex-row gap-y-4 justify-center gap-x-12">
       <div className="flex flex-col gap-y-2">
-        <p className="text-lg font-semibold">Exclusive</p>
+        <p className="text-lg font-semibold">Shopify</p>
         <p className="text-sm font-semibold">Subscribe</p>
         <p className="text-xs">Get 10% of your first order</p>
         <Input
@@ -24,7 +24,7 @@ const Footer = () => {
         <p className="text-xs">
           111 Bijoy sarani, Dhaka, <br /> DH 1515, Bangladesh.
         </p>
-        <p className="text-xs">exclusive@gmail.com</p>
+        <p className="text-xs">rahulgavit@gmail.com</p>
         <p className="text-xs">+88015-88888-9999</p>
       </div>
       <div className="flex flex-col gap-y-2">
