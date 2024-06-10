@@ -328,7 +328,7 @@ const Admin = () => {
               />
               <p className="text-base font-medium">Your not admin </p>
               <p className="text-sm font-light">
-                Don't have permission to access admin panel
+                Dont have permission to access admin panel
               </p>
             </div>
           )}
