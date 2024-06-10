@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
       email,
       password: hashPassword,
       phoneNumber,
-      address: ?address ?? {
+      address: address ?? {
         street: "",
         city: "",
         state: "",
