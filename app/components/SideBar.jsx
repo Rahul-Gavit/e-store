@@ -23,6 +23,7 @@ import {
   Cog6ToothIcon,
   InboxIcon,
   PowerIcon,
+  ArrowRightEndOnRectangleIcon,
 } from "@heroicons/react/24/solid";
 import {
   ChevronRightIcon,
@@ -30,10 +31,15 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { Link } from "@nextui-org/react";
 
 const SideBar = () => {
   const [open, setOpen] = React.useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const { data: session } = useSession();
+  const userName = session?.user.name;
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
@@ -59,7 +65,10 @@ const SideBar = () => {
         >
           <div className="mb-2 flex justify-between items-center pl-6">
             <p className="">
-              Hey <span className="text-red-500">Rahul !</span>
+              Hey{" "}
+              <span className="text-red-500">
+                {userName ? userName : "User"} !
+              </span>
             </p>
             <p>
               <IconButton variant="text" size="lg" onClick={closeDrawer}>
@@ -97,23 +106,28 @@ const SideBar = () => {
               </ListItem>
               <AccordionBody className="py-1">
                 <List className="p-0">
-                  <ListItem>
+                  <Link href={"/"}>
+                    <ListItem className="text-gray-700 hover:text-red-500">
+                      <ListItemPrefix>
+                        <ChevronRightIcon
+                          strokeWidth={3}
+                          className="h-3 w-5 "
+                        />
+                      </ListItemPrefix>
+                      Home
+                    </ListItem>
+                  </Link>
+                  <ListItem className="text-gray-700 hover:text-red-500">
                     <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                     </ListItemPrefix>
-                    Analytics
+                    Contact
                   </ListItem>
-                  <ListItem>
+                  <ListItem className="text-gray-700 hover:text-red-500">
                     <ListItemPrefix>
                       <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                     </ListItemPrefix>
-                    Reporting
-                  </ListItem>
-                  <ListItem>
-                    <ListItemPrefix>
-                      <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
-                    Projects
+                    About
                   </ListItem>
                 </List>
               </AccordionBody>
@@ -141,61 +155,80 @@ const SideBar = () => {
                     color="blue-gray"
                     className="mr-auto font-normal ml-2"
                   >
-                    E-Commerce
+                    Categories
                   </Typography>
                 </AccordionHeader>
               </ListItem>
               <AccordionBody className="py-1">
                 <List className="p-0">
-                  <ListItem>
-                    <ListItemPrefix>
-                      <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
-                    Orders
-                  </ListItem>
-                  <ListItem>
-                    <ListItemPrefix>
-                      <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
-                    Products
-                  </ListItem>
+                  <Link href={"/mobiles"}>
+                    <ListItem className="text-gray-700 hover:text-red-500">
+                      <ListItemPrefix>
+                        <ChevronRightIcon
+                          strokeWidth={3}
+                          className="h-3 w-5 "
+                        />
+                      </ListItemPrefix>
+                      Mobiles
+                    </ListItem>
+                  </Link>
+
+                  <Link href={"/headphones"}>
+                    <ListItem className="text-gray-700 hover:text-red-500">
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      Headphones
+                    </ListItem>
+                  </Link>
+
+                  <Link href={"/watches"}>
+                    <ListItem className="text-gray-700 hover:text-red-500">
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      Watches
+                    </ListItem>
+                  </Link>
+
+                  <Link href={"/televisions"}>
+                    <ListItem className="text-gray-700 hover:text-red-500">
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      Televisions
+                    </ListItem>
+                  </Link>
+
+                  <Link href={"/homelifestyles"}>
+                    <ListItem className="text-gray-700 hover:text-red-500">
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      Home & LifeStyles
+                    </ListItem>
+                  </Link>
+
+                  <Link href={"/electronics"}>
+                    <ListItem className="text-gray-700 hover:text-red-500">
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      Electronics
+                    </ListItem>
+                  </Link>
+
+                  <Link href={"/groceries"}>
+                    <ListItem className="text-gray-700 hover:text-red-500">
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      Groceries
+                    </ListItem>
+                  </Link>
                 </List>
               </AccordionBody>
             </Accordion>
-            <hr className="my-2 border-blue-gray-50" />
-            <ListItem>
-              <ListItemPrefix>
-                <InboxIcon className="h-5 w-5 mr-2" />
-              </ListItemPrefix>
-              Inbox
-              <ListItemSuffix>
-                <Chip
-                  value="14"
-                  size="sm"
-                  variant="ghost"
-                  color="blue-gray"
-                  className="rounded-full"
-                />
-              </ListItemSuffix>
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <UserCircleIcon className="h-5 w-5 mr-2" />
-              </ListItemPrefix>
-              Profile
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <Cog6ToothIcon className="h-5 w-5 mr-2" />
-              </ListItemPrefix>
-              Settings
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <PowerIcon className="h-5 w-5 mr-2" />
-              </ListItemPrefix>
-              Log Out
-            </ListItem>
           </List>
         </Card>
       </Drawer>

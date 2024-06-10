@@ -31,6 +31,10 @@ const orderSchema = new Schema({
         type: Number,
         required: true,
       },
+      productTotal: {
+        type: String,
+        required: true,
+      },
     },
   ],
   totalAmount: {
@@ -46,6 +50,7 @@ const orderSchema = new Schema({
   shippingAddress: {
     street: {
       type: String,
+
       required: true,
     },
     city: {
@@ -80,6 +85,6 @@ const orderSchema = new Schema({
 });
 
 // Create the Order model
-const Order = mongoose.model("Order", orderSchema);
+const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);
 
 module.exports = Order;

@@ -1,4 +1,4 @@
-import { Button, Input } from "@nextui-org/react";
+import { Button, Input, Link } from "@nextui-org/react";
 import React from "react";
 
 const Account = () => {
@@ -28,7 +28,9 @@ const Account = () => {
             </div>
 
             <div className="space-y-2">
-              <p className="font-medium">My Orders</p>
+              <Link href={"/orders"}>
+                <p className="font-medium">My Orders</p>
+              </Link>
               <p className="text-sm text-gray-600 pl-6">My Returns</p>
               <p className="text-sm text-gray-600 pl-6">My Collections</p>
             </div>

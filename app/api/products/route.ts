@@ -3,18 +3,15 @@ import connectMongoDB from "../../../libs/mongodb";
 import Product from "../../../models/product";
 import { v4 as uuidv4 } from "uuid";
 
-export async function GET(request) {
-  // Connect to MongoDB
+// Function to fetch products
+export async function GET(request: any) {
   await connectMongoDB();
 
   try {
-    // Fetch products from the database
     const products = await Product.find({});
-
-    // Return the fetched products as JSON response
     return NextResponse.json(products, { status: 200 });
   } catch (error) {
-    // If an error occurs, return an error response
+    console.error("Error fetching products:", error);
     return NextResponse.json(
       { error: "Failed to fetch products" },
       { status: 500 }
@@ -22,56 +19,30 @@ export async function GET(request) {
   }
 }
 
+// Function to create a new product
 export async function POST(req: any) {
-  const body = await req.json();
-  const { name, price, description, category, images, stockQuantity, color } =
-    body;
-
   await connectMongoDB();
-  const newProduct = new Product({
-    productId: uuidv4(),
-    name,
-    price,
-    description,
-    category,
-    images,
-    stockQuantity,
-    color,
-  });
 
   try {
+    const { name, price, description, category, images, stockQuantity, color } =
+      await req.json();
+    const newProduct = new Product({
+      productId: uuidv4(),
+      name,
+      price,
+      description,
+      category,
+      images,
+      stockQuantity,
+      color,
+    });
     await newProduct.save();
     return new NextResponse("Product Created", { status: 201 });
   } catch (error) {
-    console.error("Error during product creation:", error);
+    console.error("Error creating product:", error);
     return NextResponse.json(
-      {
-        message: "An error occurred while creating product.",
-      },
+      { message: "An error occurred while creating product." },
       { status: 500 }
     );
   }
-
-  // const {
-  //   title,
-  //   price,
-  //   description,
-  //   category,
-  //   image,
-  //   rating,
-  //   quantity,
-  //   color,
-  // } = await request.json();
-  // await connectMongoDB();
-  // await Product.create({
-  //   title,
-  //   price,
-  //   description,
-  //   category,
-  //   image,
-  //   rating,
-  //   quantity,
-  //   color,
-  // });
-  // return NextResponse.json({ message: "Product Created" }, { status: 201 });
 }

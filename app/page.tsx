@@ -1,9 +1,9 @@
 import React from "react";
 import HomePage from "./pages/HomePage";
 
-const Home = () => {
+const Home = async () => {
   return (
-    <div className="">
+    <div className="bg-gray-50">
       <HomePage />
     </div>
   );

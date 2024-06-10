@@ -6,9 +6,9 @@ import { Input, Button, Spinner } from "@nextui-org/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
+import { signIn } from "next-auth/react";
 
 const initialValues = {
-  name: "",
   email: "",
   password: "",
 };
@@ -22,10 +22,10 @@ const LoginPage = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormInput({
-      ...formInput,
+    setFormInput((prevInput) => ({
+      ...prevInput,
       [name]: value,
-    });
+    }));
   };
 
   const validateEmail = (email) => {
@@ -34,60 +34,58 @@ const LoginPage = () => {
   };
 
   const handleFormSubmit = async (e) => {
-    setPending(true);
     e.preventDefault();
+    setPending(true);
+    setError("");
 
-    if (!formInput.email || !formInput.password) {
+    const { email, password } = formInput;
+
+    if (!email || !password) {
       setError("All fields are necessary!");
       setPending(false);
       return;
     }
 
-    if (!validateEmail(formInput.email)) {
+    if (!validateEmail(email)) {
       setError("Please enter a valid email address!");
       setPending(false);
       return;
     }
 
-    if (formInput.password.length < 8) {
+    if (password.length < 8) {
       setError("Password must be at least 8 characters long!");
       setPending(false);
       return;
     }
 
     try {
-      const res = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(formInput),
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
       });
 
-      if (res.status === 400) {
-        setError("Invalid email or password");
-      } else if (res.ok) {
-        setError("");
-        setFormInput(initialValues);
-        router.push("/");
+      if (result?.error) {
+        setError("Invalid email or password!");
       } else {
-        setError("User registration failed");
+        router.push("/");
       }
-    } catch (error) {
-      setError("An error occurred during registration");
-      console.log(error);
+    } catch (err) {
+      console.error("An error occurred during login:", err);
+      setError("An error occurred during login: " + err.message);
+    } finally {
+      setPending(false);
     }
-    setPending(false);
   };
 
-  const toggleVisibility = () => setIsVisible(!isVisible);
+  const toggleVisibility = () => setIsVisible((prevVisible) => !prevVisible);
 
   useEffect(() => {
     if (error) {
       const timer = setTimeout(() => {
         setError("");
-      }, 3000); // Clear the error message after 5 seconds
-      return () => clearTimeout(timer); // Clear the timeout if the component unmounts
+      }, 3000); // Clear the error message after 3 seconds
+      return () => clearTimeout(timer);
     }
   }, [error]);
 
@@ -96,14 +94,14 @@ const LoginPage = () => {
       <div className="max-lg:hidden shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] rounded-lg p-12 -rotate-6">
         <img src="/login.svg" alt="NA" className="w-72 h-72 xl:w-96 xl:h-96" />
       </div>
-      <div className="w-full md:w-1/2 px-4 sm:px-12 lg:w-1/3 py-12 rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+      <div className="w-full md:w-1/2 px-4 sm:px-12 lg:w-1/3 py-6 md:py-12 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
         <form onSubmit={handleFormSubmit}>
           <div className="flex flex-col gap-y-2">
             <h1 className="text-2xl font-semibold">Log in to Exclusive</h1>
             <p className="text-xs font-medium">Enter your details below</p>
           </div>
 
-          <div className="flex flex-col gap-y-2 my-6">
+          <div className="flex flex-col gap-y-2 mt-4 md:my-6">
             {pending ? (
               <div className="flex justify-center h-60">
                 <Spinner
@@ -155,9 +153,9 @@ const LoginPage = () => {
             )}
           </div>
 
-          <div className="flex justify-between items-center my-8">
+          <div className="flex justify-between items-center mt-4 md:my-8">
             <Button type="submit" radius="sm" className="bg-red-500 text-white">
-              {pending ? "Logging in..." : "Login"}
+              Login
             </Button>
             <Link href="/forgot-password" className="text-sm text-red-500">
               Forget Password?

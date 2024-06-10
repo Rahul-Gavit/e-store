@@ -6,6 +6,7 @@ import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const initialValues = {
   name: "",
@@ -15,6 +16,7 @@ const initialValues = {
 };
 
 const SignUpPage = () => {
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const [formInput, setFormInput] = useState(initialValues);
   const [pending, setPending] = useState(false);
@@ -77,6 +79,7 @@ const SignUpPage = () => {
       } else if (res.ok) {
         setError("");
         setFormInput(initialValues);
+        router.push("/login");
       } else {
         console.log("User registration failed");
       }
@@ -89,7 +92,7 @@ const SignUpPage = () => {
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   return (
-    <div className="flex items-center justify-around my-12 max-md:px-10">
+    <div className="flex items-center justify-around my-12 max-md:px-4">
       <div className="max-lg:hidden shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] rounded-lg p-12 -rotate-6">
         <img
           src="/sign-up.svg"
@@ -97,10 +100,12 @@ const SignUpPage = () => {
           className="w-72 h-72 xl:w-96 xl:h-96"
         />
       </div>
-      <div className="w-full md:w-1/2 px-4 sm:px-12 lg:w-1/3 py-12 rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+      <div className="w-full md:w-1/2 px-4 sm:px-10 lg:w-1/3 py-6 sm:py-12 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
         <form onSubmit={handleFormSubmit}>
-          <div className="flex flex-col">
-            <h1 className="text-2xl font-semibold mb-4">Create an account</h1>
+          <div className="flex flex-col mb-2">
+            <h1 className="text-lg md:text-2xl font-semibold md:mb-4">
+              Create an account
+            </h1>
             <p className="text-xs font-medium mb-2 pl-2">
               Enter your details below
             </p>
@@ -111,7 +116,7 @@ const SignUpPage = () => {
               <Spinner label="Loading..." color="danger" labelColor="danger" />
             </div>
           ) : (
-            <div className="flex flex-col gap-y-2">
+            <div className="flex flex-col gap-y-2 max-sm:px-2">
               <Input
                 value={formInput.name}
                 onChange={handleInputChange}
