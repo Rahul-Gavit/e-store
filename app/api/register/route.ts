@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
       email,
       password: hashPassword,
       phoneNumber,
-      address: address ?? {
+      address: ?address ?? {
         street: "",
         city: "",
         state: "",
@@ -62,11 +62,8 @@ export async function POST(req: NextRequest) {
     return new NextResponse("User registered", { status: 201 });
   } catch (error) {
     console.error("Error during registration:", error);
-    return new NextResponse(
-      {
-        message: "An error occurred while registering user.",
-      },
-      { status: 500 }
-    );
+    return new NextResponse("An error occurred while registering user.", {
+      status: 500,
+    });
   }
 }

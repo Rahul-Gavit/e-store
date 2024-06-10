@@ -19,7 +19,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
     const orders = await Order.find({ userId });
 
     return NextResponse.json(orders, { status: 200 });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching orders:", error.message);
     return NextResponse.json(
       {
