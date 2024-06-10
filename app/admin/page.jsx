@@ -322,9 +322,9 @@ const Admin = () => {
           ) : (
             <div className="flex flex-col items-center">
               <img
-                src="/No data.svg"
+                src="/noData.svg"
                 alt="No Data"
-                className="w-16 h-16 sm:h-96 sm:w-auto  p-2 "
+                className="w-16 h-16 sm:h-96 sm:w-auto p-2"
               />
               <p className="text-base font-medium">Your not admin </p>
               <p className="text-sm font-light">

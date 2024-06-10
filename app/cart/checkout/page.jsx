@@ -302,7 +302,7 @@ const CheckOut = () => {
         <div className="flex flex-col items-center">
           <img
             src="/paymentDone.svg"
-            alt="No Data"
+            alt="noData"
             className="w-16 h-16 sm:h-96 sm:w-auto  p-2 "
           />
           <div

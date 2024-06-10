@@ -12,6 +12,7 @@ const Categories = () => {
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState("");
   const [sortedProducts, setSortedProducts] = useState(null);
+  const category = params.slug;
 
   const filterProductByPrice = (sortBy) => {
     const sortedProducts = [...products].sort((a, b) => {
@@ -32,7 +33,7 @@ const Categories = () => {
   const fetchProductsByCategories = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/${params.slug}`, {
+      const response = await fetch(`/api/${category}`, {
         cache: "no-store",
       });
 
@@ -47,10 +48,10 @@ const Categories = () => {
   };
 
   useEffect(() => {
-    if (params.slug) {
+    if (category) {
       fetchProductsByCategories();
     }
-  }, [params.slug]);
+  }, [category]);
 
   return (
     <div className="py-4 sm:py-8 px-4 md:px-10">
@@ -63,12 +64,12 @@ const Categories = () => {
           {products.length === 0 ? (
             <div className="flex flex-col items-center">
               <img
-                src="/No data.svg"
+                src="/noData.svg"
                 alt="No Data"
                 className="w-16 h-16 sm:h-96 sm:w-auto  p-2 "
               />
               <p className="text-base font-medium">
-                No {params.slug.toLowerCase()} products found{" "}
+                No {category.toLowerCase()} products found{" "}
               </p>
               <p className="text-sm font-light">
                 Please Check another products
@@ -80,7 +81,7 @@ const Categories = () => {
                 <div className="space-x-4 text-gray-500 text-sm">
                   <span>Home</span>
                   <span>/</span>
-                  <span className="text-black">{params.slug}</span>
+                  <span className="text-black">{category}</span>
                 </div>
                 <div className="flex">
                   <Select

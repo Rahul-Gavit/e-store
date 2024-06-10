@@ -12,11 +12,11 @@ const Orders = () => {
   const params = useParams();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
+  const userId = params.userId;
 
   useEffect(() => {
     const fetchOrders = async () => {
       setLoading(true);
-      const userId = params.userId;
       try {
         const response = await fetch(`/api/order?userId=${userId}`);
         if (!response.ok) {
@@ -30,7 +30,7 @@ const Orders = () => {
       setLoading(false);
     };
     fetchOrders();
-  }, []);
+  }, [userId]);
 
   const getStatusProgressValue = (status) => {
     switch (status) {
@@ -161,7 +161,7 @@ const Orders = () => {
       ) : (
         <div className="flex flex-col items-center">
           <img
-            src="/No data.svg"
+            src="/noData.svg"
             alt="No Data"
             className="w-16 h-16 sm:h-96 sm:w-auto p-2"
           />

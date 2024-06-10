@@ -51,7 +51,7 @@ const Cart = () => {
       {productArray.length === 0 ? (
         <div className="flex flex-col items-center">
           <img
-            src="/No data.svg"
+            src="/noData.svg"
             alt="No Data"
             className="w-16 h-16 sm:h-96 sm:w-auto  p-2 "
           />
