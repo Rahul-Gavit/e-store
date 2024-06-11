@@ -53,7 +53,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.name = user.name;
         token.email = user.email;
         token.userId = user.userId;
-        token.address = user.address.default;
       }
       // Unwanted fields ko exclude karna
       return token;
@@ -69,12 +68,4 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
   },
-
-  // pages: {
-  //   signIn: "/api/login",
-  // signOut: '/auth/signout',
-  // error: '/auth/error',
-  // verifyRequest: '/auth/verify-request',
-  // newUser: '/auth/new-user'
-  // },
 });
