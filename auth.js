@@ -21,14 +21,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         try {
           // Make a POST request to your external API for authentication
-          const response = await fetch(
-            `${process.env.NEXTAUTH_URL}/api/login`,
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ email, password }),
-            }
-          );
+          const response = await fetch(`${process.env.NEXTAUTH_URL}api/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+
+          console.log(response);
 
           if (response.ok) {
             // If authentication is successful, return user data
