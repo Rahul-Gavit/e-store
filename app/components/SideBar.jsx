@@ -39,7 +39,7 @@ const SideBar = () => {
   const [open, setOpen] = React.useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const { data: session } = useSession();
-  const userName = session?.user.name;
+  const userName = session?.user?.name;
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
