@@ -93,116 +93,130 @@ const SignUpPage = () => {
 
   return (
     <div className="flex items-center justify-around my-12 max-md:px-4">
-      <div className="max-lg:hidden shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] rounded-lg p-12 -rotate-6">
-        <img
-          src="/sign-up.svg"
-          alt="NA"
-          className="w-72 h-72 xl:w-96 xl:h-96"
-        />
-      </div>
-      <div className="w-full md:w-1/2 px-4 sm:px-10 lg:w-1/3 py-6 sm:py-12 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
-        <form onSubmit={handleFormSubmit}>
-          <div className="flex flex-col mb-2">
-            <h1 className="text-lg md:text-2xl font-semibold md:mb-4">
-              Create an account
-            </h1>
-            <p className="text-xs font-medium mb-2 pl-2">
-              Enter your details below
-            </p>
+      {pending ? (
+        <div className="flex justify-center h-60">
+          <Spinner label="Loading..." color="danger" labelColor="danger" />
+        </div>
+      ) : (
+        <div>
+          <div className="max-lg:hidden shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] rounded-lg p-12 -rotate-6">
+            <img
+              src="/sign-up.svg"
+              alt="NA"
+              className="w-72 h-72 xl:w-96 xl:h-96"
+            />
           </div>
+          <div className="w-full md:w-1/2 px-4 sm:px-10 lg:w-1/3 py-6 sm:py-12 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+            <form onSubmit={handleFormSubmit}>
+              <div className="flex flex-col mb-2">
+                <h1 className="text-lg md:text-2xl font-semibold md:mb-4">
+                  Create an account
+                </h1>
+                <p className="text-xs font-medium mb-2 pl-2">
+                  Enter your details below
+                </p>
+              </div>
 
-          {pending ? (
-            <div className="flex justify-center h-60">
-              <Spinner label="Loading..." color="danger" labelColor="danger" />
-            </div>
-          ) : (
-            <div className="flex flex-col gap-y-2 max-sm:px-2">
-              <Input
-                value={formInput.name}
-                onChange={handleInputChange}
-                type="text"
-                variant="flat"
-                label="Name"
-                name="name"
-                required={true}
-                className="py-1"
-              />
-              <Input
-                value={formInput.email}
-                onChange={handleInputChange}
-                type="email"
-                variant="flat"
-                label="Email"
-                required
-                name="email"
-                className="py-1"
-              />
-              <Input
-                value={formInput.phoneNumber}
-                onChange={handleInputChange}
-                type="number"
-                variant="flat"
-                label="Phone No."
-                required
-                name="phoneNumber"
-                className="py-1"
-              />
-              <Input
-                label="Password"
-                variant="flat"
-                name="password"
-                required
-                value={formInput.password}
-                onChange={handleInputChange}
-                endContent={
-                  <button
-                    className="focus:outline-none"
-                    type="button"
-                    onClick={toggleVisibility}
-                  >
-                    {isVisible ? (
-                      <EyeIcon className="text-2xl w-5 h-5 mb-2 text-default-400 pointer-events-none" />
-                    ) : (
-                      <EyeSlashIcon className="text-2xl w-5 h-5 mb-2 text-default-400 pointer-events-none" />
-                    )}
-                  </button>
-                }
-                type={isVisible ? "text" : "password"}
-                className="py-1"
-              />
-            </div>
-          )}
+              {pending ? (
+                <div className="flex justify-center h-60">
+                  <Spinner
+                    label="Loading..."
+                    color="danger"
+                    labelColor="danger"
+                  />
+                </div>
+              ) : (
+                <div className="flex flex-col gap-y-2 max-sm:px-2">
+                  <Input
+                    value={formInput.name}
+                    onChange={handleInputChange}
+                    type="text"
+                    variant="flat"
+                    label="Name"
+                    name="name"
+                    required={true}
+                    className="py-1"
+                  />
+                  <Input
+                    value={formInput.email}
+                    onChange={handleInputChange}
+                    type="email"
+                    variant="flat"
+                    label="Email"
+                    required
+                    name="email"
+                    className="py-1"
+                  />
+                  <Input
+                    value={formInput.phoneNumber}
+                    onChange={handleInputChange}
+                    type="number"
+                    variant="flat"
+                    label="Phone No."
+                    required
+                    name="phoneNumber"
+                    className="py-1"
+                  />
+                  <Input
+                    label="Password"
+                    variant="flat"
+                    name="password"
+                    required
+                    value={formInput.password}
+                    onChange={handleInputChange}
+                    endContent={
+                      <button
+                        className="focus:outline-none"
+                        type="button"
+                        onClick={toggleVisibility}
+                      >
+                        {isVisible ? (
+                          <EyeIcon className="text-2xl w-5 h-5 mb-2 text-default-400 pointer-events-none" />
+                        ) : (
+                          <EyeSlashIcon className="text-2xl w-5 h-5 mb-2 text-default-400 pointer-events-none" />
+                        )}
+                      </button>
+                    }
+                    type={isVisible ? "text" : "password"}
+                    className="py-1"
+                  />
+                </div>
+              )}
 
-          {error && (
-            <span className=" text-red-500 text-xs rounded-md">{error}</span>
-          )}
+              {error && (
+                <span className=" text-red-500 text-xs rounded-md">
+                  {error}
+                </span>
+              )}
 
-          <div className="flex flex-col my-8 gap-y-2">
-            <Button
-              type="submit"
-              radius="sm"
-              className="bg-red-500 w-full text-white"
-            >
-              Create Account
-            </Button>
-            <Button
-              type="button"
-              radius="sm"
-              color="default"
-              className="w-full"
-            >
-              Sign Up with Google
-            </Button>
+              <div className="flex flex-col my-8 gap-y-2">
+                <Button
+                  type="submit"
+                  radius="sm"
+                  className="bg-red-500 w-full text-white"
+                >
+                  Create Account
+                </Button>
+                <Button
+                  type="button"
+                  radius="sm"
+                  color="default"
+                  className="w-full"
+                >
+                  Sign Up with Google
+                </Button>
+              </div>
+
+              <div className="flex justify-center gap-x-2 text-sm">
+                <p>Already have an account?</p>
+                <Link className="font-semibold" href={"/login"}>
+                  Log In
+                </Link>
+              </div>
+            </form>
           </div>
-
-          <div className="flex justify-center gap-x-2 text-sm">
-            <p>Already have an account?</p>
-            <Link className="font-semibold" href={"/login"}>
-              Log In
-            </Link>
-          </div>
-        </form>
-      </div>
+        </div>
+      )}
     </div>
   );
 };

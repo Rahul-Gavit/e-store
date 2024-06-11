@@ -3,10 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { Progress, Spinner } from "@nextui-org/react";
-import {
-  ArrowUpTrayIcon,
-  ChevronDoubleUpIcon,
-} from "@heroicons/react/24/solid";
 
 const Orders = () => {
   const params = useParams();

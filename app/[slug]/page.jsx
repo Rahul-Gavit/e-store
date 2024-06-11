@@ -1,7 +1,5 @@
 "use client";
 import { Button, Select, SelectItem, Spinner } from "@nextui-org/react";
-import axios from "axios";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
