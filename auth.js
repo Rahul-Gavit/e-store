@@ -22,7 +22,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         try {
           // Make a POST request to your external API for authentication
           const response = await fetch(
-            `${process.env.REACT_APP_API}/api/login`,
+            `${process.env.NEXTAUTH_URL}/api/login`,
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
